@@ -22,6 +22,7 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -66,6 +67,19 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
+
+        if(m_Points > GameController.Instance.bestScore)
+        {
+            setHighScorer(m_Points, GameController.Instance.playerName);
+        }
+        
+    }
+
+
+    public void setHighScorer(int highestScore, string highestScorer)
+    {
+        GameController.Instance.bestScore = highestScore;
+        GameController.Instance.highScorerName = highestScorer;
     }
 
     public void GameOver()
@@ -73,4 +87,6 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
     }
+
+    
 }
